@@ -69,19 +69,20 @@
 
 <style lang="scss" >
 
+  @font-face {
+    // font-family: Roboto;
+    // src: url(./Assets/Roboto-Regular.ttf);
+    font-family: AlexBrush;
+    src: url(./Assets/AlexBrush-Regular.ttf);
+  }
+
 body {
     margin: 0px;
     padding: 0px;
-
-    @font-face {
-      font-family: Roboto;
-      src: url('./Assets/Roboto-Regular.ttf');
-    }
-
     
     * {
       box-sizing: border-box;
-      font-family: 'Roboto';
+      font-family: 'AlexBrush';
     }
 
 }
