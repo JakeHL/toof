@@ -49,10 +49,24 @@
 
   };
 
-  // TODO remove
-  dc.addAccount("Google","134513461");
-  dc.addAccount("Microsoft","224562");
-  dc.addAccount("Apple","24562664");
+  for(let i = 0; i < 60; i++) {
+
+    let name = '';
+    if(i % 4 == 0)
+      name = 'Google';
+    else if(i % 3 == 0)
+      name = 'Yahoo';
+    else if(i % 2 == 0)
+      name = 'Microsoft'
+    else
+      name = 'Github'
+
+    name = name + i;
+    let key = Math.floor((Math.random() * 9999999) + 1000000);
+
+    dc.addAccount(name, key);
+
+  }
 
   export default App;
 
@@ -70,10 +84,13 @@
 <style lang="scss" >
 
   @font-face {
-    // font-family: Roboto;
-    // src: url(./Assets/Roboto-Regular.ttf);
     font-family: AlexBrush;
     src: url(./Assets/AlexBrush-Regular.ttf);
+  }
+
+  @font-face {
+    font-family: Roboto;
+    src: url(./Assets/Roboto-Regular.ttf);
   }
 
 body {
@@ -82,7 +99,7 @@ body {
     
     * {
       box-sizing: border-box;
-      font-family: 'AlexBrush';
+      font-family: 'Roboto';
     }
 
 }

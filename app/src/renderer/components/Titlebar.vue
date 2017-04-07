@@ -40,6 +40,11 @@
 
     $blue-darker: desaturate(darken($base-blue, 5%), 5%);
 
+    #Titlebar {
+        box-shadow: 0px 0px 10px 5px rgba(#000, 0.3);
+        z-index: 9999;
+    }
+
     #Windowbar {
         background-color: $blue-darker;
         height: 30px;

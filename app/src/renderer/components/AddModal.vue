@@ -71,19 +71,23 @@
         position: fixed;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(#000, 0.6);        
+        background-color: rgba(#000, 0.6);      
+
+        * {
+            font-size: 18px;
+        }  
 
         #Add-Dialog {
-            padding: 10px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             background: #FFF;
-            width: 60%;
+            width: 80%;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0px 20px 20px 0 rgba(#000, 0.2);
+            box-shadow: 0px 20px 20px 0 rgba(#000, 0.2);            
 
             label {
                 font-weight: bold;

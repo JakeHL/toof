@@ -2,7 +2,7 @@
     
     <div id="content-area">
 
-        <div v-for="key in accounts">{{ key.accountName }} - {{ key.key }}</div>        
+        <accountView v-for="key in accounts" :load-percent="loadPercent" :key-model="key"></accountView>
         
         <div v-on:click="openModal" id="fab">
             <svg viewBox="0 0 24 24">
@@ -18,17 +18,55 @@
 
 <script>
     import addmodal from './AddModal'; 
+    import accountView from './AccountView';
+
     import {eventHub} from '../main'
 
     export default {
         props: [ "accounts" ],
+        data() {
+            return {
+                loadPercent: 0,
+                seconds: 0
+            }
+        },
         components: {
-            addmodal
+            addmodal,
+            accountView
         },
         methods: {
             openModal: function() {
                 eventHub.$emit('show-add-modal');
+            },
+            genTimer: function() {
+
+                let incValue = 1000;
+                this.loadPercent = 0;
+
+                let interval;
+
+                let increment = () => {
+                    let d = new Date();
+                    let seconds = d.getSeconds();                    
+                    this.seconds = seconds;
+                    if(seconds == 0 || seconds == 30)
+                        eventHub.$emit('get-new-code');
+                    else if (seconds == 29 || seconds == 59)
+                        eventHub.$emit('disable-load-animation');
+
+                    this.loadPercent = (((seconds > 30 ? seconds - 30 : seconds) / 30) * 100)
+                    if(this.loadPercent == 0)
+                    {
+                        alert("fuck bud");
+                    }
+                }
+
+                interval = setInterval(increment, incValue);
+
             }
+        },
+        created: function() {
+            this.genTimer();
         }
     }
 
@@ -38,13 +76,22 @@
     #content-area {
         position: relative;
         flex: 1;
+        background: #EEE;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar              {
+            width: 8px;
+        }
+        &::-webkit-scrollbar-thumb        {
+            background-color: #BBB;
+        }
 
         #fab {
 
             cursor: pointer;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
             width: 60px;
             height: 60px;
             border-radius: 100%;
@@ -73,6 +120,10 @@
                 }
             }
 
+        }
+
+        .last {
+            margin-bottom: 100px;
         }
 
     }
